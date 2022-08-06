@@ -1,10 +1,21 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div>
+    <AddNote />
+    <div class="main">This is a Div</div>
+  </div>
 </template>
+<script>
+import AddNote from "./components/AddNote.vue";
+import ObjectModal from "./components/ObjectModal.vue";
+//import {  } from "@vue/composition-api";
+
+export default {
+  name: "App",
+  components: { AddNote },
+  setup() {},
+};
+</script>
+
 
 <style>
 #app {
@@ -26,5 +37,14 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+.main {
+  max-width: 700px;
+  height: 800px;
+  color: rgb(0, 0, 0);
+  background-color: antiquewhite;
+  margin-left: auto;
+  margin-right: auto;
+  border: solid;
 }
 </style>
