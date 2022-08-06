@@ -7,7 +7,7 @@
 <script>
 import AddNote from "./components/AddNote.vue";
 import ObjectModal from "./components/ObjectModal.vue";
-//import {  } from "@vue/composition-api";
+import {} from "@vue/composition-api";
 
 export default {
   name: "App",
