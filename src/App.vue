@@ -1,13 +1,12 @@
 <template>
   <div>
     <AddNote />
-    <div class="main">This is a Div</div>
+    <div class="main"></div>
   </div>
 </template>
 <script>
 import AddNote from "./components/AddNote.vue";
-import ObjectModal from "./components/ObjectModal.vue";
-import {} from "@vue/composition-api";
+
 
 export default {
   name: "App",
@@ -39,12 +38,13 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 .main {
-  max-width: 700px;
-  height: 800px;
+  max-width: 500px;
+  height: 750px;
   color: rgb(0, 0, 0);
-  background-color: antiquewhite;
+  background-color: rgb(224, 218, 218);
   margin-left: auto;
   margin-right: auto;
-  border: solid;
+  border: .5px solid;
+  border-radius: 10px;
 }
 </style>

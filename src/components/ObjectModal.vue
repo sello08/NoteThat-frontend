@@ -1,17 +1,58 @@
 <template>
   <div class="modal-overlay">
     <div class="modal">
-      <h6>Saved!</h6>
-      <p>Your Details have been saved Successfully</p>
-      <button>Go Home</button>
+      <input v-model="message" placeholder="edit heading" />
+      <div>
+        <button v-if="message" @click="submitNote">Submit Note</button>
+      </div>
     </div>
-    <div class="close"></div>
+    <div class="close" @click="closeModal">X</div>
   </div>
 </template>
 
 <script>
-export default {};
+import { ref, computed } from "vue";
+import { useStore } from "vuex";
+
+
+
+export default {
+  name: " ObjectModal ",
+  
+
+  setup(){
+    const store = useStore();
+    const isShowing = computed(() => store.state.isShowing);
+    const message = ref('')
+    const notes = computed(() => store.state.notes);
+
+    function updateNotes() {
+      store.commit("updateNotes");
+    }
+   
+    function closeModal() {
+      store.commit("updateIsShowing");
+    }
+
+    function submitNote() {
+      console.log(message.value);
+    }
+
+    
+
+   
+
+    
+
+    
+
+   
+    return{ closeModal, isShowing, message, notes, updateNotes, submitNote }
+  }
+};
 </script>
+
+
 <style scoped>
 .modal-overlay {
   position: fixed;
@@ -26,24 +67,21 @@ export default {};
 
 .modal {
   text-align: center;
-  background-color: white;
+  background-color: rgb(224, 218, 218);
   height: 500px;
-  width: 500px;
+  width: 400px;
   margin-top: 10%;
   padding: 60px 0;
-  border-radius: 20px;
+  border-radius: 5px;
 }
 .close {
-  margin: 10% 0 0 16px;
+  margin: 8% 0 0 1px;
   cursor: pointer;
+  color: rgb(242, 214, 55);
 }
 
 .close-img {
   width: 25px;
-}
-
-.check {
-  width: 150px;
 }
 
 h6 {
@@ -52,18 +90,22 @@ h6 {
   margin: 20px 0;
 }
 
-p {
-  font-size: 16px;
-  margin: 20px 0;
-}
-
 button {
-  background-color: #ac003e;
-  width: 150px;
-  height: 40px;
+  display: center;
+  background-color: #000000;
+  width: 100px;
+  height: 30px;
   color: white;
   font-size: 14px;
-  border-radius: 16px;
-  margin-top: 50px;
+  border-radius: 5px;
+  margin-top: 470px;
+  
+  
+}
+input{
+  width: 300px;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
 }
 </style>
