@@ -4,17 +4,17 @@ import { createStore } from 'vuex'
 export default  createStore({
 
   state: {
-      note:{
-        header: '',
-        content: '',
-      },
       notes: [],
       isShowing: false,
     },
   mutations: {
-      updateNotes(state, payload){
-        state.notes.push(payload);
-      },
+    //note is an an object(contains header and content)
+    updateNotes(state, note ){
+      state.notes.push(note);
+    },
+    deleteNotes(state, id ){
+      state.notes = state.notes.filter((note) => note.id != id )
+    },
       updateIsShowing(state){
         state.isShowing = !state.isShowing
       }     

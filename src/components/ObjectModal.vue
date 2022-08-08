@@ -1,9 +1,10 @@
 <template>
   <div class="modal-overlay">
     <div class="modal">
-      <input v-model="message" placeholder="edit heading" />
+      <input v-model="title" placeholder="edit heading" />
+      <textarea v-model="info" placeholder="add multiple lines"></textarea>
       <div>
-        <button v-if="message" @click="submitNote">Submit Note</button>
+        <button v-if="title" @click="addNote">Submit Note</button>
       </div>
     </div>
     <div class="close" @click="closeModal">X</div>
@@ -14,41 +15,39 @@
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
 
-
-
 export default {
   name: " ObjectModal ",
-  
 
-  setup(){
+  setup() {
     const store = useStore();
     const isShowing = computed(() => store.state.isShowing);
-    const message = ref('')
     const notes = computed(() => store.state.notes);
+    const title = ref("");
+    const info = ref("");
 
-    function updateNotes() {
-      store.commit("updateNotes");
-    }
-   
+    //update isShowing value for close the modal
     function closeModal() {
       store.commit("updateIsShowing");
     }
 
-    function submitNote() {
-      console.log(message.value);
+    function addNote() {
+      store.commit("updateNotes", {
+        id: Math.random(),
+        header: title.value,
+        content: info.value,
+      });
+      store.commit("updateIsShowing");
     }
 
-    
-
-   
-
-    
-
-    
-
-   
-    return{ closeModal, isShowing, message, notes, updateNotes, submitNote }
-  }
+    return {
+      closeModal,
+      addNote,
+      isShowing,
+      notes,
+      title,
+      info,
+    };
+  },
 };
 </script>
 
@@ -97,15 +96,21 @@ button {
   height: 30px;
   color: white;
   font-size: 14px;
-  border-radius: 5px;
-  margin-top: 470px;
-  
-  
+  border: none;
+  border-radius: 15px;
+  margin-top: 25px;
 }
-input{
+input {
   width: 300px;
   height: 30px;
   border: none;
-  border-radius: 5px;
+  border-radius: 15px;
+}
+textarea {
+  margin: 20px;
+  width: 300px;
+  height: 400px;
+  border: none;
+  border-radius: 15px;
 }
 </style>

@@ -1,17 +1,25 @@
 <template>
   <div>
     <AddNote />
-    <div class="main"></div>
+    <div class="main">
+      <TemporaryNote />
+    </div>
   </div>
 </template>
 <script>
 import AddNote from "./components/AddNote.vue";
-
+import TemporaryNote from "./components/TemporaryNote.vue";
+import { ref, computed } from "vue";
+import { useStore } from "vuex";
 
 export default {
   name: "App",
-  components: { AddNote },
-  setup() {},
+  components: { AddNote, TemporaryNote },
+  setup() {
+    const store = useStore();
+
+    return {};
+  },
 };
 </script>
 
@@ -44,7 +52,7 @@ nav a.router-link-exact-active {
   background-color: rgb(224, 218, 218);
   margin-left: auto;
   margin-right: auto;
-  border: .5px solid;
-  border-radius: 10px;
+  border: 0.1px solid;
+  border-radius: 15px;
 }
 </style>
