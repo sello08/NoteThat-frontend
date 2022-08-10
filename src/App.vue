@@ -46,13 +46,8 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 .main {
-  max-width: 500px;
-  height: 750px;
+  height: 175px;
   color: rgb(0, 0, 0);
-  background-color: rgb(224, 218, 218);
-  margin-left: auto;
-  margin-right: auto;
-  border: 0.1px solid;
-  border-radius: 15px;
+  background-color: rgb(154, 15, 29);
 }
 </style>

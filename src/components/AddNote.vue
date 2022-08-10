@@ -1,26 +1,29 @@
 <template>
   <button @click="updateShowing">New Note</button>
   <ObjectModal v-if="isShowing" />
+  <EditNotes v-if="isEditing" />
 </template>
 
 <script>
 import ObjectModal from "./ObjectModal.vue";
+import EditNotes from "./EditNotes.vue";
 import { useStore } from "vuex";
 import { ref, computed } from "@vue/reactivity";
 
 export default {
   name: "AddNote",
-  components: { ObjectModal },
+  components: { ObjectModal, EditNotes },
 
   setup() {
     const store = useStore();
     const notes = computed(() => store.state.notes);
     const isShowing = computed(() => store.state.isShowing);
+    const isEditing = computed(() => store.state.isEditing);
 
     function updateShowing() {
       store.commit("updateIsShowing");
     }
-    return { notes, updateShowing, isShowing };
+    return { notes, updateShowing, isShowing, isEditing };
   },
 };
 </script>
@@ -35,5 +38,6 @@ button {
   border-radius: 15px;
   border: none;
   margin-right: auto;
+  cursor: pointer;
 }
 </style>
