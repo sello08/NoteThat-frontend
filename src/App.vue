@@ -1,23 +1,24 @@
 <template>
-  <div>
-    <AddNote />
-    <div class="main">
+  <div class="main">
+    <SideMenu class="side-menu" />
+    <div class="sub">
+      <AddNote />
       <TemporaryNote />
     </div>
   </div>
 </template>
 <script>
 import AddNote from "./components/AddNote.vue";
+import SideMenu from "./components/SideMenu.vue";
 import TemporaryNote from "./components/TemporaryNote.vue";
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
 
 export default {
   name: "App",
-  components: { AddNote, TemporaryNote },
+  components: { AddNote, TemporaryNote, SideMenu },
   setup() {
     const store = useStore();
-
     return {};
   },
 };
@@ -46,8 +47,14 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 .main {
-  height: 175px;
-  color: rgb(0, 0, 0);
-  background-color: rgb(154, 15, 29);
+  display: flex;
+  margin-left: -0px;
+}
+.side-menu {
+  margin-left: 0;
+}
+.sub {
+  margin-left: 0;
+  width: 100%;
 }
 </style>

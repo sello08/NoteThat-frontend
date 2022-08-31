@@ -4,7 +4,7 @@ import { createStore } from 'vuex'
 export default  createStore({
 
   state: {
-      notes: [{id: "1", header: "test header", content: "test content"}],
+      notes: [],
       selectedNote:{
         id:'',
         header:'',
@@ -14,9 +14,8 @@ export default  createStore({
       isEditing: false,
     },
   mutations: {
-    //note is an an object(contains header and content)
-    addNotes(state, note ){
-      state.notes.push(note);      
+    setNotes(state, notes ){
+      state.notes = notes;      
     },
     editNotes(state, note){
       const tempNotes = state.notes;
@@ -28,9 +27,7 @@ export default  createStore({
 
       state.notes = tempNotes;
     },
-    deleteNotes(state, id ){
-      state.notes = state.notes.filter((note) => note.id != id )
-    },
+    
     updateNotes(state, id){
       const foundNote = state.notes.find((note) => note.id == id )
       state.selectedNote = foundNote; 

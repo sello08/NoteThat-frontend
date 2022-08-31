@@ -4,7 +4,7 @@
       <input v-model="title" placeholder="edit heading" />
       <textarea v-model="info" placeholder="add multiple lines"></textarea>
       <div>
-        <button v-if="title" @click="submitNote2">Edit Note</button>
+        <button v-if="title" @click="submitNote2(id)">Edit Note</button>
       </div>
     </div>
     <div class="close" @click="closeEditModal">X</div>
@@ -12,8 +12,10 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useStore } from "vuex";
+import axios from "axios";
+import { getNoteList } from "@/composables/axiosFunctions";
 
 export default {
   name: " EditNotes ",
@@ -30,13 +32,19 @@ export default {
     function closeEditModal() {
       store.commit("updateIsEditing");
     }
-    function submitNote2() {
-      store.commit("editNotes", {
-        id: id.value,
-        header: title.value,
-        content: info.value,
-      });
-      store.commit("updateIsEditing");
+    function submitNote2(id) {
+      axios
+        .put("http://localhost:3000/note/" + id, {
+          header: title.value,
+          content: info.value,
+        })
+        .then(() => {
+          getNoteList().then((notes) => {
+            store.commit("setNotes", notes);
+          });
+        });
+
+      closeEditModal();
     }
 
     return {

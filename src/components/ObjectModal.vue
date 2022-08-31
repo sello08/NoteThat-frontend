@@ -4,7 +4,7 @@
       <input v-model="title" placeholder="edit heading" />
       <textarea v-model="info" placeholder="add multiple lines"></textarea>
       <div>
-        <button v-if="title" @click="submitNote">Submit Note</button>
+        <button v-if="title" @click="submitNote(id)">Submit Note</button>
       </div>
     </div>
     <div class="close" @click="closeModal">X</div>
@@ -14,6 +14,8 @@
 <script>
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
+import axios from "axios";
+import { getNoteList } from "@/composables/axiosFunctions";
 
 export default {
   name: " ObjectModal ",
@@ -21,7 +23,9 @@ export default {
   setup() {
     const store = useStore();
     const isShowing = computed(() => store.state.isShowing);
+    const isEditing = computed(() => store.state.isEditing);
     const notes = computed(() => store.state.notes);
+    const id = ref(store.state.selectedNote.id);
     const title = ref("");
     const info = ref("");
 
@@ -29,23 +33,46 @@ export default {
     function closeModal() {
       store.commit("updateIsShowing");
     }
-
     function submitNote() {
-      store.commit("addNotes", {
-        id: Math.random(),
-        header: title.value,
-        content: info.value,
-      });
-      store.commit("updateIsShowing");
+      axios
+        .post("http://localhost:3000/note", {
+          header: title.value,
+          content: info.value,
+        })
+        .then(() => {
+          getNoteList().then((notes) => {
+            store.commit("setNotes", notes);
+          });
+        });
+
+      closeModal();
+    }
+
+    function submitNote2(id) {
+      axios
+        .put("http://localhost:3000/note/" + id, {
+          header: title.value,
+          content: info.value,
+        })
+        .then(() => {
+          getNoteList().then((notes) => {
+            store.commit("setNotes", notes);
+          });
+        });
+
+      closeModal();
     }
 
     return {
       closeModal,
       submitNote,
+      submitNote2,
+      isEditing,
       isShowing,
       notes,
       title,
       info,
+      id,
     };
   },
 };
@@ -78,7 +105,6 @@ export default {
   cursor: pointer;
   color: rgb(242, 240, 240));
 }
-
 .close-img {
   width: 25px;
 }
