@@ -4,34 +4,55 @@
       <input v-model="title" placeholder="edit heading" />
       <textarea v-model="info" placeholder="add multiple lines"></textarea>
       <div>
-        <button v-if="title" @click="submitNote2(id)">Edit Note</button>
+        <button
+          v-if="title"
+          @click="mode == 'create' ? submitNote() : submitNote2(id)"
+        >
+          Submit
+        </button>
       </div>
     </div>
-    <div class="close" @click="closeEditModal">X</div>
+    <div class="close" @click="closeModal">X</div>
   </div>
 </template>
 
 <script>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed } from "vue";
 import { useStore } from "vuex";
 import axios from "axios";
 import { getNoteList } from "@/composables/axiosFunctions";
 
 export default {
-  name: " EditNotes ",
-
+  name: " CreateUpdateNote ",
+  props: ["mode"],
   setup() {
     const store = useStore();
+    const isShowing = computed(() => store.state.isShowing);
     const isEditing = computed(() => store.state.isEditing);
-    const selectedNote = computed(() => store.state.selectedNote);
-    const title = ref(store.state.selectedNote.header);
-    const info = ref(store.state.selectedNote.content);
+    const notes = computed(() => store.state.notes);
     const id = ref(store.state.selectedNote.id);
+    const title = ref("");
+    const info = ref("");
 
-    //update isEditing value for close the modal
-    function closeEditModal() {
-      store.commit("updateIsEditing");
+    //update isShowing value for close the modal
+    function closeModal() {
+      store.commit("updateIsShowing");
     }
+    function submitNote() {
+      axios
+        .post("http://localhost:3000/note", {
+          header: title.value,
+          content: info.value,
+        })
+        .then(() => {
+          getNoteList().then((notes) => {
+            store.commit("setNotes", notes);
+          });
+        });
+
+      closeModal();
+    }
+
     function submitNote2(id) {
       axios
         .put("http://localhost:3000/note/" + id, {
@@ -44,16 +65,18 @@ export default {
           });
         });
 
-      closeEditModal();
+      closeModal();
     }
 
     return {
-      closeEditModal,
+      closeModal,
+      submitNote,
+      submitNote2,
+      isEditing,
+      isShowing,
+      notes,
       title,
       info,
-      isEditing,
-      selectedNote,
-      submitNote2,
       id,
     };
   },
@@ -72,7 +95,6 @@ export default {
   justify-content: center;
   background-color: #000000da;
 }
-
 .modal {
   text-align: center;
   background-color: rgb(242, 240, 240);
@@ -85,9 +107,8 @@ export default {
 .close {
   margin: 8% 0 0 1px;
   cursor: pointer;
-  color: rgb(242, 214, 55);
+  color: rgb(242, 240, 240));
 }
-
 .close-img {
   width: 25px;
 }

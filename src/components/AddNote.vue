@@ -1,18 +1,20 @@
 <template>
-  <ObjectModal v-if="isShowing" />
-  <EditNotes v-if="isEditing" />
-  <CreateUpdateNote :type="isShowing ? 'create' : 'edit'" />
+  <CreateUpdateNote
+    v-if="isShowing"
+    :mode="mode == 'create' ? 'create' : 'edit'"
+  />
 </template>
 
 <script>
 import ObjectModal from "./ObjectModal.vue";
 import EditNotes from "./EditNotes.vue";
+import CreateUpdateNote from "./CreateUpdateNote.vue";
 import { useStore } from "vuex";
 import { ref, computed } from "@vue/reactivity";
 
 export default {
   name: "AddNote",
-  components: { ObjectModal, EditNotes },
+  components: { ObjectModal, EditNotes, CreateUpdateNote },
 
   setup() {
     const store = useStore();
