@@ -11,7 +11,7 @@ export default  createStore({
         content:''
       },
       isShowing: false,
-      isEditing: false,
+      isEditing: '',
     },
   mutations: {
     setNotes(state, notes ){
@@ -31,13 +31,16 @@ export default  createStore({
     updateNotes(state, id){
       const foundNote = state.notes.find((note) => note.id == id )
       state.selectedNote = foundNote; 
-      state.isEditing = !state.isEditing;
+      state.isShowing = !state.isShowing;
     },
     updateIsShowing(state){
       state.isShowing = !state.isShowing
     },
-    updateIsEditing(state){
-      state.isEditing = !state.isEditing
+    updateEditing(state){
+      state.isEditing = true
+    },
+    updateEditing2(state){
+      state.isEditing = false
     }
     
     }

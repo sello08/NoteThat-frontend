@@ -8,7 +8,7 @@
           v-if="title"
           @click="mode == 'create' ? submitNote() : submitNote2(id)"
         >
-          Submit
+          {{ mode }}
         </button>
       </div>
     </div>
@@ -25,18 +25,23 @@ import { getNoteList } from "@/composables/axiosFunctions";
 export default {
   name: " CreateUpdateNote ",
   props: ["mode"],
-  setup() {
+  setup(props) {
     const store = useStore();
     const isShowing = computed(() => store.state.isShowing);
     const isEditing = computed(() => store.state.isEditing);
     const notes = computed(() => store.state.notes);
     const id = ref(store.state.selectedNote.id);
-    const title = ref("");
-    const info = ref("");
-
+    if (props.mode == "edit") {
+      var title = ref(store.state.selectedNote.header);
+      var info = ref(store.state.selectedNote.content);
+    } else {
+      var title = ref("");
+      var info = ref("");
+    }
     //update isShowing value for close the modal
     function closeModal() {
       store.commit("updateIsShowing");
+      console.log(props.mode);
     }
     function submitNote() {
       axios
@@ -72,8 +77,8 @@ export default {
       closeModal,
       submitNote,
       submitNote2,
-      isEditing,
       isShowing,
+      isEditing,
       notes,
       title,
       info,

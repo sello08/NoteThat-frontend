@@ -49,6 +49,7 @@ export default {
     }
     function editNote(id) {
       store.commit("updateNotes", id);
+      store.commit("updateEditing");
     }
     var currentTime = new Date().toLocaleDateString();
 
@@ -59,8 +60,8 @@ export default {
       isShowing,
       editNote,
       editNotes,
-      isEditing,
       currentTime,
+      isEditing,
     };
   },
 };

@@ -15,12 +15,14 @@ export default {
   setup() {
     const store = useStore();
     const isShowing = computed(() => store.state.isShowing);
+    const isEditing = computed(() => store.state.isEditing);
 
     function updateShowing() {
       store.commit("updateIsShowing");
+      store.commit("updateEditing2");
     }
 
-    return { updateShowing, isShowing };
+    return { updateShowing, isShowing, isEditing };
   },
 };
 </script>
