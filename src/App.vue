@@ -2,6 +2,7 @@
   <div class="main">
     <SideMenu class="side-menu" />
     <div class="sub">
+      <SlidingCards />
       <AddNote />
       <TemporaryNote />
     </div>
@@ -10,13 +11,14 @@
 <script>
 import AddNote from "./components/AddNote.vue";
 import SideMenu from "./components/SideMenu.vue";
+import SlidingCards from "./components/SlidingCards.vue";
 import TemporaryNote from "./components/TemporaryNote.vue";
 import { ref, computed } from "vue";
 import { useStore } from "vuex";
 
 export default {
   name: "App",
-  components: { AddNote, TemporaryNote, SideMenu },
+  components: { AddNote, TemporaryNote, SideMenu, SlidingCards },
   setup() {
     const store = useStore();
     return {};
@@ -55,6 +57,6 @@ nav a.router-link-exact-active {
 }
 .sub {
   margin-left: 0;
-  width: 100%;
+  width: 85%;
 }
 </style>

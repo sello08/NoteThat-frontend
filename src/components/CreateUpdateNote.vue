@@ -103,7 +103,7 @@ export default {
 .modal {
   text-align: center;
   background-color: rgb(242, 240, 240);
-  height: 500px;
+  height: 600px;
   width: 400px;
   margin-top: 10%;
   padding: 60px 0;

@@ -1,6 +1,14 @@
 <template>
   <div class="menu">
-    <button @click="updateShowing" class="add-note">New Note</button>
+    <a-button
+      id="new"
+      @click="updateShowing"
+      type="primary"
+      danger
+      size="small"
+      shape="round"
+      >New Note
+    </a-button>
     <div class="menu2">Main Menu</div>
   </div>
 </template>
@@ -19,7 +27,7 @@ export default {
 
     function updateShowing() {
       store.commit("updateIsShowing");
-      store.commit("updateEditing2");
+      store.commit("updateEditing");
     }
 
     return { updateShowing, isShowing, isEditing };
@@ -28,8 +36,11 @@ export default {
 </script>
 
 <style>
+#new {
+  margin-top: 100px;
+}
 .menu {
-  width: 220px;
+  width: 15%;
   height: 100vh;
   background-color: rgb(68, 68, 68);
 }

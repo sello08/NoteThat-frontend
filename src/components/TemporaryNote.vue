@@ -1,17 +1,27 @@
 <template>
-  <div class="top-side">{{ currentTime }}</div>
   <div class="aaa">
     <div class="list">
       <div class="cards" v-for="note in notes" :key="note.index">
         <div class="card">
           <div class="card-header">
-            {{ note.header.substring(0, 17) + "..." }}
+            {{
+              note.header.length > 12
+                ? note.header.substring(0, 12) + "..."
+                : note.header
+            }}
           </div>
-          <div class="btns">
-            <span @click="editNote(note.id)" class="more">A</span>
-            <span @click="deleteNote(note.id)" class="more">.</span>
-            <span class="more">...</span>
+          <div class="card-content">
+            {{
+              note.content.length > 240
+                ? note.content.substring(0, 240) + "..."
+                : note.content
+            }}
           </div>
+        </div>
+        <div class="btns">
+          <span @click="editNote(note.id)" class="more">A</span>
+          <span @click="deleteNote(note.id)" class="more">.</span>
+          <span class="more">...</span>
         </div>
       </div>
     </div>
@@ -70,11 +80,12 @@ export default {
 <style>
 .btns {
   display: flex;
-  margin-top: 75px;
+  margin-top: -10%;
   justify-content: center;
 }
 .card {
-  width: 150px;
+  width: 250px;
+  height: 350px;
 }
 .cards {
   background-color: white;
@@ -97,6 +108,7 @@ export default {
   max-width: 1300px;
   padding-top: 15px;
   display: flex;
+  overflow: scroll;
 }
 .aaa {
   margin-top: 25px;
@@ -120,6 +132,7 @@ export default {
   border-top-right-radius: 15px;
   border-top-left-radius: 5px;
   color: white;
+  padding: 1px;
 }
 .aaa *::-webkit-scrollbar {
   width: 4px;
