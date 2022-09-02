@@ -3,25 +3,39 @@
     <SideMenu class="side-menu" />
     <div class="sub">
       <SlidingCards />
-      <AddNote />
-      <TemporaryNote />
+      <CreateUpdateNote
+        v-if="isShowing"
+        :mode="isEditing == true ? 'edit' : 'create'"
+      />
+      <CardList />
     </div>
   </div>
 </template>
 <script>
-import AddNote from "./components/AddNote.vue";
-import SideMenu from "./components/SideMenu.vue";
+import SideMenu from "./components/SideBar.vue";
 import SlidingCards from "./components/SlidingCards.vue";
-import TemporaryNote from "./components/TemporaryNote.vue";
-import { ref, computed } from "vue";
+import CardList from "./components/CardList.vue";
+import CreateUpdateNote from "./components/CreateUpdateNote.vue";
 import { useStore } from "vuex";
+import { ref, computed } from "vue";
 
 export default {
   name: "App",
-  components: { AddNote, TemporaryNote, SideMenu, SlidingCards },
+  components: {
+    SideMenu,
+    SlidingCards,
+    CardList,
+    CreateUpdateNote,
+  },
   setup() {
     const store = useStore();
-    return {};
+    const isShowing = computed(() => store.state.isShowing);
+    const isEditing = computed(() => store.state.isEditing);
+
+    function updateShowing() {
+      store.commit("updateIsShowing");
+    }
+    return { updateShowing, isShowing, isEditing };
   },
 };
 </script>

@@ -19,9 +19,22 @@
           </div>
         </div>
         <div class="btns">
-          <span @click="editNote(note.id)" class="more">A</span>
-          <span @click="deleteNote(note.id)" class="more">.</span>
-          <span class="more">...</span>
+          <a-button
+            @click="editNote(note.id)"
+            type="link"
+            shape="circle"
+            class="more"
+          >
+            <template #icon><EditFilled /></template>
+          </a-button>
+          <a-button
+            @click="deleteNote(note.id)"
+            type="link"
+            shape="circle"
+            class="more"
+          >
+            <template #icon><DeleteFilled /></template>
+          </a-button>
         </div>
       </div>
     </div>
@@ -33,10 +46,15 @@ import { useStore } from "vuex";
 import { ref, computed } from "vue";
 import { getNoteList } from "@/composables/axiosFunctions";
 import axios from "axios";
+import { EditFilled } from "@ant-design/icons-vue";
+import { DeleteFilled } from "@ant-design/icons-vue";
 
 export default {
-  name: "TemporaryNote",
-  components: {},
+  name: "CardList",
+  components: {
+    EditFilled,
+    DeleteFilled,
+  },
 
   setup() {
     const store = useStore();
@@ -78,11 +96,6 @@ export default {
 </script>
 
 <style>
-.btns {
-  display: flex;
-  margin-top: -10%;
-  justify-content: center;
-}
 .card {
   width: 250px;
   height: 350px;
@@ -94,15 +107,7 @@ export default {
   border-radius: 15px;
 }
 .more {
-  text-align: center;
-  background-color: rgb(0, 0, 0);
-  color: white;
-  width: 30px;
-  height: 30px;
-  margin: 10px;
-  border-radius: 15px;
-  margin-left: 1px;
-  cursor: pointer;
+  margin: 8px;
 }
 .list {
   max-width: 1300px;
@@ -126,6 +131,9 @@ export default {
   background-color: rgb(242, 241, 241);
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034);
   border-radius: 15px;
+}
+.card-content {
+  padding: 20px;
 }
 .card-header {
   background-color: rgb(68, 68, 68);

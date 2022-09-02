@@ -1,18 +1,22 @@
 <template>
   <div class="modal-overlay">
     <div class="modal">
+      <a-button class="close" shape="circle" @click="closeModal" type="link">
+        <template #icon> <CloseCircleFilled /></template>
+      </a-button>
       <input v-model="title" placeholder="edit heading" />
       <textarea v-model="info" placeholder="add multiple lines"></textarea>
       <div>
-        <button
+        <a-button
+          shape="circle"
+          type="link"
           v-if="title"
           @click="mode == 'create' ? submitNote() : submitNote2(id)"
         >
-          {{ mode }}
-        </button>
+          <template><EditFilled /></template>
+        </a-button>
       </div>
     </div>
-    <div class="close" @click="closeModal">X</div>
   </div>
 </template>
 
@@ -21,10 +25,16 @@ import { ref, computed } from "vue";
 import { useStore } from "vuex";
 import axios from "axios";
 import { getNoteList } from "@/composables/axiosFunctions";
+import { EditFilled } from "@ant-design/icons-vue";
+import { CloseCircleFilled } from "@ant-design/icons-vue";
 
 export default {
   name: " CreateUpdateNote ",
   props: ["mode"],
+  components: {
+    EditFilled,
+    CloseCircleFilled,
+  },
   setup(props) {
     const store = useStore();
     const isShowing = computed(() => store.state.isShowing);
@@ -99,53 +109,40 @@ export default {
   display: flex;
   justify-content: center;
   background-color: #000000da;
+  z-index: 100;
 }
 .modal {
   text-align: center;
-  background-color: rgb(242, 240, 240);
+  background-color: rgb(246, 246, 246);
   height: 600px;
-  width: 400px;
+  width: 450px;
   margin-top: 10%;
   padding: 60px 0;
   border-radius: 5px;
 }
 .close {
-  margin: 8% 0 0 1px;
-  cursor: pointer;
-  color: rgb(242, 240, 240));
+  display: flex;
+  margin-left: 420px;
+  margin-top: -50px;
 }
-.close-img {
-  width: 25px;
-}
-
 h6 {
   font-weight: 500;
   font-size: 28px;
   margin: 20px 0;
 }
-
-button {
-  display: center;
-  background-color: #000000;
-  width: 100px;
-  height: 30px;
-  color: white;
-  font-size: 14px;
-  border: none;
-  border-radius: 15px;
-  margin-top: 25px;
-}
 input {
-  width: 300px;
+  width: 85%;
   height: 30px;
   border: none;
-  border-radius: 15px;
+  border-radius: 4px;
+  padding: 16px 8px;
 }
 textarea {
-  margin: 20px;
-  width: 300px;
-  height: 400px;
+  margin-top: 20px;
+  width: 85%;
+  height: 420px;
   border: none;
-  border-radius: 15px;
+  border-radius: 4px;
+  padding: 16px 8px;
 }
 </style>

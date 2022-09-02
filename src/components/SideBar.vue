@@ -9,7 +9,7 @@
       shape="round"
       >New Note
     </a-button>
-    <div class="menu2">Main Menu</div>
+    <div class="menu2">Content</div>
   </div>
 </template>
 
@@ -18,7 +18,7 @@ import { useStore } from "vuex";
 import { ref, computed } from "@vue/reactivity";
 
 export default {
-  name: "Menu",
+  name: "SideBar",
   components: {},
   setup() {
     const store = useStore();
@@ -27,7 +27,7 @@ export default {
 
     function updateShowing() {
       store.commit("updateIsShowing");
-      store.commit("updateEditing");
+      store.commit("updateEditing2");
     }
 
     return { updateShowing, isShowing, isEditing };
@@ -45,9 +45,11 @@ export default {
   background-color: rgb(68, 68, 68);
 }
 .menu2 {
+  display: block;
   margin-top: 60px;
   height: 30px;
-  background-color: rgba(182, 182, 182, 0.392);
+  text-align: center;
+  background-color: rgba(182, 182, 182, 0.3);
   color: white;
 }
 .add-note {
