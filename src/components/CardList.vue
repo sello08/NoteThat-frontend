@@ -79,7 +79,6 @@ export default {
       store.commit("updateNotes", id);
       store.commit("updateEditing");
     }
-    var currentTime = new Date().toLocaleDateString();
 
     return {
       notes,
@@ -88,7 +87,6 @@ export default {
       isShowing,
       editNote,
       editNotes,
-      currentTime,
       isEditing,
     };
   },

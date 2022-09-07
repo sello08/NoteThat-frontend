@@ -1,42 +1,16 @@
 <template>
-  <div class="main">
-    <SideMenu class="side-menu" />
-    <div class="sub">
-      <SlidingCards />
-      <CreateUpdateNote
-        v-if="isShowing"
-        :mode="isEditing == true ? 'edit' : 'create'"
-      />
-      <CardList />
-    </div>
-  </div>
+  <div><router-link to="/signin">Sign In</router-link></div>
+  <div><router-link to="/">Home</router-link></div>
+  <router-view />
 </template>
 <script>
-import SideMenu from "./components/SideBar.vue";
-import SlidingCards from "./components/SlidingCards.vue";
-import CardList from "./components/CardList.vue";
-import CreateUpdateNote from "./components/CreateUpdateNote.vue";
 import { useStore } from "vuex";
 import { ref, computed } from "vue";
 
 export default {
   name: "App",
-  components: {
-    SideMenu,
-    SlidingCards,
-    CardList,
-    CreateUpdateNote,
-  },
-  setup() {
-    const store = useStore();
-    const isShowing = computed(() => store.state.isShowing);
-    const isEditing = computed(() => store.state.isEditing);
-
-    function updateShowing() {
-      store.commit("updateIsShowing");
-    }
-    return { updateShowing, isShowing, isEditing };
-  },
+  components: {},
+  setup() {},
 };
 </script>
 
@@ -61,16 +35,5 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
-}
-.main {
-  display: flex;
-  margin-left: -0px;
-}
-.side-menu {
-  margin-left: 0;
-}
-.sub {
-  margin-left: 0;
-  width: 85%;
 }
 </style>
