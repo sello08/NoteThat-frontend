@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import SignIn from '../views/SignIn'
+import SignUp from '../views/SignUp'
 import Home from '../views/Home'
 
 
@@ -11,11 +12,17 @@ import Home from '../views/Home'
       name: 'SignIn',
       component: SignIn
     },
+    {
+      path: '/signup',
+      name: 'SignUp',
+      component: SignUp
+    },
   {
     path: '/',
     name: 'Home',
     component: Home
   },
+
 
   ]
 

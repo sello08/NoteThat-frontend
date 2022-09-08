@@ -5,6 +5,18 @@
     <br />
     <input
       class="input"
+      v-model="name"
+      type="text"
+      placeholder="Enter your name"
+    />
+    <input
+      class="input"
+      v-model="surname"
+      type="text"
+      placeholder="Enter your surname"
+    />
+    <input
+      class="input"
       v-model="email"
       type="email"
       placeholder="Enter your e-mail address"
@@ -17,14 +29,12 @@
       placeholder="Enter your password"
     />
     <br />
-    <button @click="signIn()">Sign In</button>
-    <br />
-    {{ msg }}
+    <button @click="signUp()">Sign Up</button>
   </div>
 </template>
 
 <script>
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import axios from "axios";
 
 export default {
@@ -32,27 +42,31 @@ export default {
   components: {},
 
   setup() {
+    var name = ref("");
+    var surname = ref("");
     var email = ref("");
     var password = ref("");
-    var msg = ref("");
 
-    async function signIn() {
+    async function signUp() {
       await axios
-        .post("http://localhost:3000/signin", {
+        .post("http://localhost:3000/signup", {
+          name: name.value,
+          surname: surname.value,
           email: email.value,
           password: password.value,
         })
         .then((res) => {
-          msg = res.data;
-          console.log(msg);
+          console.log(res);
+          console.log("value is:", name.value);
         });
     }
 
     return {
-      signIn,
+      signUp,
+      name,
+      surname,
       email,
       password,
-      msg,
     };
   },
 };

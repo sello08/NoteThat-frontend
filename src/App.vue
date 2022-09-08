@@ -1,6 +1,7 @@
 <template>
-  <div><router-link to="/signin">Sign In</router-link></div>
-  <div><router-link to="/">Home</router-link></div>
+  <router-link to="/signin">Sign In</router-link>
+  <router-link to="/signup">Sign Up</router-link>
+  <router-link to="/">Home</router-link>
   <router-view />
 </template>
 <script>
