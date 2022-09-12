@@ -24,17 +24,18 @@
 </template>
 
 <script>
-import { ref, watch } from "vue";
+import { ref } from "@vue/reactivity";
 import axios from "axios";
+import { watch } from "@vue/runtime-core";
 
 export default {
-  name: " SignUp ",
+  name: " SignIn ",
   components: {},
 
   setup() {
     var email = ref("");
     var password = ref("");
-    var msg = ref("");
+    let msg = ref("aaa");
 
     async function signIn() {
       await axios
@@ -43,10 +44,17 @@ export default {
           password: password.value,
         })
         .then((res) => {
-          msg = res.data;
-          console.log(msg);
+          msg.value = res.data;
+          console.log("message:", msg.value);
         });
     }
+
+    watch(
+      () => msg.value,
+      () => {
+        console.log("msg.value:", msg.value);
+      }
+    );
 
     return {
       signIn,
