@@ -56,7 +56,7 @@ export default {
     //-------------------------------- Get token from localstorage --------------------------------------------------------------
 
     var token = localStorage.getItem("token");
-
+    // ------------------------ Create Note ---------------------------------------------------
     function submitNote() {
       axios
         .post(
@@ -79,7 +79,7 @@ export default {
 
       closeModal();
     }
-
+    // ------------------------ Update Note ---------------------------------------------------
     function submitNote2(id) {
       axios
         .put(

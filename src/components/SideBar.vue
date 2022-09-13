@@ -1,5 +1,13 @@
 <template>
   <div class="menu">
+    <div class="avatar-user">
+      <a-avatar class="avatar" :size="64">
+        <template #icon><UserOutlined /></template>
+      </a-avatar>
+    </div>
+    <br />
+    <span class="active-user">{{ active }}</span>
+    <br />
     <a-button
       id="new"
       @click="updateShowing"
@@ -16,28 +24,42 @@
 <script>
 import { useStore } from "vuex";
 import { ref, computed } from "@vue/reactivity";
+import { UserOutlined } from "@ant-design/icons-vue";
 
 export default {
   name: "SideBar",
-  components: {},
+  components: { UserOutlined },
   setup() {
     const store = useStore();
     const isShowing = computed(() => store.state.isShowing);
     const isEditing = computed(() => store.state.isEditing);
+    var activeUser = computed(() => store.state.activeUser);
+
+    var active = localStorage.getItem("active");
 
     function updateShowing() {
       store.commit("updateIsShowing");
       store.commit("updateEditing2");
     }
 
-    return { updateShowing, isShowing, isEditing };
+    return { updateShowing, isShowing, isEditing, activeUser, active };
   },
 };
 </script>
 
 <style>
 #new {
-  margin-top: 100px;
+  margin-top: 55px;
+}
+.avatar-user {
+  display: inline-block;
+  margin-top: 20px;
+}
+.active-user {
+  color: white;
+}
+.avatar {
+  margin-top: 20px;
 }
 .menu {
   width: 15%;
@@ -46,7 +68,7 @@ export default {
 }
 .menu2 {
   display: block;
-  margin-top: 60px;
+  margin-top: 25px;
   height: 30px;
   text-align: center;
   background-color: rgba(182, 182, 182, 0.3);

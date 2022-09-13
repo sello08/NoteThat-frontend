@@ -28,6 +28,8 @@
 <script>
 import { ref } from "@vue/reactivity";
 import axios from "axios";
+import { computed, watch } from "vue";
+import { useStore } from "vuex";
 import router from "@/router";
 
 export default {
@@ -35,9 +37,12 @@ export default {
   components: {},
 
   setup() {
+    const store = useStore();
     var email = ref("");
     var password = ref("");
     var msg = ref("");
+    var activeUser = computed(() => store.state.activeUser);
+    const updateActiveUser = computed(() => store.state.updateActiveUser);
 
     async function signIn() {
       await axios
@@ -51,9 +56,17 @@ export default {
           localStorage.setItem("token", res.data.token);
 
           msg.value = res.data;
+
           if (res.data.message == "Success") {
             router.push("/");
           }
+
+          // -------------------------------  Show active user name in homepage  --------------------
+
+          var name = res.data.user.name;
+          var surname = res.data.user.surname;
+
+          localStorage.setItem("active", name + " " + surname);
         });
     }
 
@@ -62,6 +75,8 @@ export default {
       email,
       password,
       msg,
+      activeUser,
+      updateActiveUser,
     };
   },
 };
