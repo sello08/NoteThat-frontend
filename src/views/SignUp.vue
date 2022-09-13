@@ -29,7 +29,11 @@
       placeholder="Enter your password"
     />
     <br />
-    <button @click="signUp()">Sign Up</button>
+    <button class="btn-signup" @click="signUp()">Sign Up</button>
+    <br />
+    <br />
+    <br />
+    {{ msg }}
   </div>
 </template>
 
@@ -46,6 +50,7 @@ export default {
     var surname = ref("");
     var email = ref("");
     var password = ref("");
+    var msg = ref("");
 
     async function signUp() {
       await axios
@@ -56,8 +61,8 @@ export default {
           password: password.value,
         })
         .then((res) => {
-          console.log(res);
-          console.log("value is:", name.value);
+          console.log(res.data);
+          msg.value = res.data;
         });
     }
 
@@ -67,6 +72,7 @@ export default {
       surname,
       email,
       password,
+      msg,
     };
   },
 };
@@ -92,7 +98,7 @@ export default {
   height: 40px;
   background: none;
 }
-button {
+.btn-signup {
   color: white;
   border-radius: 5px;
   border: none;

@@ -2,9 +2,14 @@ import axios from 'axios'
 
 async function getNoteList() {
   try {
-   const data = await axios({
+    var token = localStorage.getItem("token");
+
+     const data = await axios({
       method: 'get',
-      url: 'http://localhost:3000/get-notes'
+      url: 'http://localhost:3000/get-notes',
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
     })
     return data.data;
   }

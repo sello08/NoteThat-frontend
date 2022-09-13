@@ -17,7 +17,9 @@
       placeholder="Enter your password"
     />
     <br />
-    <button @click="signIn()">Sign In</button>
+    <button class="btn-signin" @click="signIn()">Sign In</button>
+    <br />
+    <br />
     <br />
     {{ msg }}
   </div>
@@ -26,7 +28,7 @@
 <script>
 import { ref } from "@vue/reactivity";
 import axios from "axios";
-import { watch } from "@vue/runtime-core";
+import router from "@/router";
 
 export default {
   name: " SignIn ",
@@ -35,7 +37,7 @@ export default {
   setup() {
     var email = ref("");
     var password = ref("");
-    let msg = ref("aaa");
+    var msg = ref("");
 
     async function signIn() {
       await axios
@@ -44,17 +46,16 @@ export default {
           password: password.value,
         })
         .then((res) => {
+          // -----------------------------   Set token value to local storage ----------------------------------------
+
+          localStorage.setItem("token", res.data.token);
+
           msg.value = res.data;
-          console.log("message:", msg.value);
+          if (res.data.message == "Success") {
+            router.push("/");
+          }
         });
     }
-
-    watch(
-      () => msg.value,
-      () => {
-        console.log("msg.value:", msg.value);
-      }
-    );
 
     return {
       signIn,
@@ -86,7 +87,7 @@ export default {
   height: 40px;
   background: none;
 }
-button {
+.btn-signin {
   color: white;
   border-radius: 5px;
   border: none;

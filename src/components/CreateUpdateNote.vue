@@ -53,12 +53,24 @@ export default {
       store.commit("updateIsShowing");
       console.log(props.mode);
     }
+    //-------------------------------- Get token from localstorage --------------------------------------------------------------
+
+    var token = localStorage.getItem("token");
+
     function submitNote() {
       axios
-        .post("http://localhost:3000/note", {
-          header: title.value,
-          content: info.value,
-        })
+        .post(
+          "http://localhost:3000/note",
+          {
+            header: title.value,
+            content: info.value,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        )
         .then(() => {
           getNoteList().then((notes) => {
             store.commit("setNotes", notes);
@@ -70,10 +82,18 @@ export default {
 
     function submitNote2(id) {
       axios
-        .put("http://localhost:3000/note/" + id, {
-          header: title.value,
-          content: info.value,
-        })
+        .put(
+          "http://localhost:3000/note/" + id,
+          {
+            header: title.value,
+            content: info.value,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        )
         .then(() => {
           getNoteList().then((notes) => {
             store.commit("setNotes", notes);

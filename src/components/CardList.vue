@@ -68,12 +68,24 @@ export default {
       store.commit("setNotes", notes);
     });
 
+    var token = localStorage.getItem("token");
+
     function deleteNote(id) {
-      axios.delete("http://localhost:3000/note/" + id).then(() => {
-        getNoteList().then((notes) => {
-          store.commit("setNotes", notes);
+      axios
+        .delete(
+          "http://localhost:3000/note/" + id,
+
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        )
+        .then(() => {
+          getNoteList().then((notes) => {
+            store.commit("setNotes", notes);
+          });
         });
-      });
     }
     function editNote(id) {
       store.commit("updateNotes", id);
