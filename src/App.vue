@@ -1,4 +1,5 @@
 <template>
+  <!-- All routerlinks will append here -->
   <router-view />
 </template>
 <script>

@@ -9,6 +9,7 @@
     <br />
     <span class="active-user">{{ activeUser }}</span>
     <br />
+    <br />
     <a-button
       id="new"
       @click="updateShowing"
@@ -16,9 +17,27 @@
       danger
       size="small"
       shape="round"
-      >New Note +
+      ><router-link to="/">Sign Out</router-link>
     </a-button>
+
     <span class="menu2"></span>
+
+    <br />
+    <div id="sidemenu-btns">
+      <li>
+        <router-link id="link" to="/homepage">Home</router-link>
+      </li>
+      <li>
+        <router-link id="link" to="/homepage">Trash</router-link>
+      </li>
+      <li>
+        <router-link id="link" to="/homepage">Tags</router-link>
+      </li>
+      <li>
+        <router-link id="link" to="/homepage">Alarm</router-link>
+      </li>
+      <hr id="line" />
+    </div>
   </div>
 </template>
 
@@ -48,6 +67,24 @@ export default {
 </script>
 
 <style>
+#sidemenu-btns {
+  color: rgb(203, 201, 201);
+  font-weight: bolder;
+  cursor: pointer;
+  margin-left: -110px;
+}
+#link {
+  color: rgb(203, 201, 201);
+}
+li {
+  list-style-type: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+li:hover {
+  background-color: rgb(203, 201, 201, 0.3);
+}
+
 #new {
   margin-top: 32px;
 }
@@ -57,6 +94,7 @@ export default {
 }
 .active-user {
   color: white;
+  font-weight: bold;
 }
 .avatar {
   margin-top: 20px;
@@ -68,7 +106,7 @@ export default {
 }
 .menu2 {
   display: block;
-  margin-top: 25px;
+  margin-top: -5px;
   height: 30px;
   text-align: center;
   background-color: rgba(182, 182, 182, 0.3);
@@ -86,6 +124,7 @@ export default {
   margin-top: 25px;
   font-size: 15px;
 }
-.menu2 {
+#line {
+  border: 1px rgba(182, 182, 182, 0.3) solid;
 }
 </style>

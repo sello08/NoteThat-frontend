@@ -11,7 +11,7 @@ import MainPage from '../components/MainPage'
       { path: '/signin',name:'SignIn' , component: SignIn},
       { path: '/signup',name:'SignUp' , component: SignUp},
       { path: '/homepage',name:'Home' , component: Home},
-      { path: '/mainpage',name:'MainPage' , component: MainPage},
+      { path: '/',name:'MainPage' , component: MainPage},
   ]
   })
 
