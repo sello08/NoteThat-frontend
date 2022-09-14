@@ -48,8 +48,6 @@
       ></span
     >
   </div>
-
-  <router-view />
 </template>
 
 <script>

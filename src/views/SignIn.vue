@@ -1,27 +1,29 @@
 <template>
-  <div class="signin-main">
-    <h1>NoteThat</h1>
-    <h4>Just note.</h4>
-    <br />
-    <input
-      class="input"
-      v-model="email"
-      type="email"
-      placeholder="Enter your e-mail address"
-    />
-    <br />
-    <input
-      class="input"
-      v-model="password"
-      type="password"
-      placeholder="Enter your password"
-    />
-    <br />
-    <button class="btn-signin" @click="signIn()">Sign In</button>
-    <br />
-    <br />
-    <br />
-    {{ msg }}
+  <div class="signin-background">
+    <div class="signin-main">
+      <h1>NoteThat</h1>
+      <h4>Simply note.</h4>
+      <br />
+      <input
+        class="input"
+        v-model="email"
+        type="email"
+        placeholder="Enter your e-mail address"
+      />
+      <br />
+      <input
+        class="input"
+        v-model="password"
+        type="password"
+        placeholder="Enter your password"
+      />
+      <br />
+      <button class="btn-signin" @click="signIn()">Sign In</button>
+      <br />
+      <br />
+      <br />
+      {{ msg }}
+    </div>
   </div>
 </template>
 
