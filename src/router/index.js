@@ -18,7 +18,7 @@ import Home from '../views/Home'
       component: SignUp
     },
   {
-    path: '/',
+    path: '/homepage',
     name: 'Home',
     component: Home
   },

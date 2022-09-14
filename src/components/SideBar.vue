@@ -6,7 +6,8 @@
       </a-avatar>
     </div>
     <br />
-    <span class="active-user">{{ active }}</span>
+    <br />
+    <span class="active-user">{{ activeUser }}</span>
     <br />
     <a-button
       id="new"
@@ -15,9 +16,9 @@
       danger
       size="small"
       shape="round"
-      >New Note
+      >New Note +
     </a-button>
-    <div class="menu2">Content</div>
+    <span class="menu2"></span>
   </div>
 </template>
 
@@ -33,23 +34,22 @@ export default {
     const store = useStore();
     const isShowing = computed(() => store.state.isShowing);
     const isEditing = computed(() => store.state.isEditing);
-    var activeUser = computed(() => store.state.activeUser);
 
-    var active = localStorage.getItem("active");
+    var activeUser = localStorage.getItem("activeUser");
 
     function updateShowing() {
       store.commit("updateIsShowing");
       store.commit("updateEditing2");
     }
 
-    return { updateShowing, isShowing, isEditing, activeUser, active };
+    return { updateShowing, isShowing, isEditing, activeUser, activeUser };
   },
 };
 </script>
 
 <style>
 #new {
-  margin-top: 55px;
+  margin-top: 32px;
 }
 .avatar-user {
   display: inline-block;

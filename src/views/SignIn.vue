@@ -37,12 +37,9 @@ export default {
   components: {},
 
   setup() {
-    const store = useStore();
     var email = ref("");
     var password = ref("");
     var msg = ref("");
-    var activeUser = computed(() => store.state.activeUser);
-    const updateActiveUser = computed(() => store.state.updateActiveUser);
 
     async function signIn() {
       await axios
@@ -58,7 +55,7 @@ export default {
           msg.value = res.data;
 
           if (res.data.message == "Success") {
-            router.push("/");
+            router.push("homepage");
           }
 
           // -------------------------------  Show active user name in homepage  --------------------
@@ -66,7 +63,7 @@ export default {
           var name = res.data.user.name;
           var surname = res.data.user.surname;
 
-          localStorage.setItem("active", name + " " + surname);
+          localStorage.setItem("activeUser", name + " " + surname);
         });
     }
 
@@ -75,8 +72,6 @@ export default {
       email,
       password,
       msg,
-      activeUser,
-      updateActiveUser,
     };
   },
 };
