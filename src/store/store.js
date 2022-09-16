@@ -13,6 +13,7 @@ export default  createStore({
       isShowing: false,
       isEditing: '',
       activeUser: '',
+      isTrashed: false,
     },
   mutations: {
     setNotes(state, notes ){
@@ -45,6 +46,9 @@ export default  createStore({
     },
     updateActiveUser(state, user){
       state.activeUser = user
+    },
+    updateIsTrashedClicked(state){
+      state.isTrashed = !state.isTrashed
     }
     
     }

@@ -5,11 +5,11 @@
 <script>
 import { useStore } from "vuex";
 import { ref, computed } from "vue";
-import MainPage from "./components/MainPage.vue";
+import MainPage from "./components/OpeningPage.vue";
 
 export default {
   name: "App",
-  components: { MainPage },
+  components: {},
   setup() {},
 };
 </script>

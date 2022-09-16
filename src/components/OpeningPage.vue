@@ -2,22 +2,10 @@
   <div class="header">
     <h1>NoteThat</h1>
     <div class="signs">
-      <a-button
-        id="new"
-        @click="updateShowing"
-        type="primary"
-        danger
-        size="medium"
-        shape="flat"
+      <a-button id="new" type="primary" danger size="medium" shape="flat"
         ><router-link to="/signin">Sign In</router-link>
       </a-button>
-      <a-button
-        id="new"
-        @click="updateShowing"
-        type="primary"
-        danger
-        size="medium"
-        shape="default"
+      <a-button id="new" type="primary" danger size="medium" shape="default"
         ><router-link to="/signup">Sign Up</router-link>
       </a-button>
     </div>
@@ -32,13 +20,7 @@
       Remember all things via using NoteThat. Plan everything in one place.
     </h2>
     <br />
-    <a-button
-      id="new"
-      @click="updateShowing"
-      type="primary"
-      danger
-      size="large"
-      shape="flat"
+    <a-button id="new" type="primary" danger size="large" shape="flat"
       ><router-link to="/signup">Join now for Free.</router-link>
     </a-button>
     <br />
@@ -52,7 +34,7 @@
 
 <script>
 export default {
-  name: "MainPage",
+  name: "OpeningPage",
   components: {},
   setup() {},
 };

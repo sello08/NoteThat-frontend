@@ -10,17 +10,20 @@
     <span class="active-user">{{ activeUser }}</span>
     <br />
     <br />
+    <a-button id="new" type="primary" danger size="small" shape="round"
+      ><router-link to="/">Sign Out</router-link>
+    </a-button>
+
+    <span class="menu2"></span>
     <a-button
       id="new"
       @click="updateShowing"
       type="primary"
       danger
-      size="small"
+      size="large"
       shape="round"
-      ><router-link to="/">Sign Out</router-link>
+      ><router-link to="/">New Note</router-link>
     </a-button>
-
-    <span class="menu2"></span>
 
     <br />
     <div id="sidemenu-btns">
@@ -28,13 +31,13 @@
         <router-link id="link" to="/homepage">Home</router-link>
       </li>
       <li>
-        <router-link id="link" to="/homepage">Trash</router-link>
+        <p id="link" @click="isTrashClicked">Trash</p>
       </li>
       <li>
-        <router-link id="link" to="/homepage">Tags</router-link>
+        <p id="link">Tags</p>
       </li>
       <li>
-        <router-link id="link" to="/homepage">Alarm</router-link>
+        <p id="link">Alarm</p>
       </li>
       <hr id="line" />
     </div>
@@ -56,12 +59,23 @@ export default {
 
     var activeUser = localStorage.getItem("activeUser");
 
+    function isTrashClicked() {
+      store.commit("updateIsTrashedClicked");
+    }
+
     function updateShowing() {
       store.commit("updateIsShowing");
       store.commit("updateEditing2");
     }
 
-    return { updateShowing, isShowing, isEditing, activeUser, activeUser };
+    return {
+      updateShowing,
+      isShowing,
+      isEditing,
+      activeUser,
+      activeUser,
+      isTrashClicked,
+    };
   },
 };
 </script>
@@ -74,12 +88,14 @@ export default {
   margin-left: -110px;
 }
 #link {
+  display: inline-flex;
+  height: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   color: rgb(203, 201, 201);
 }
 li {
   list-style-type: none;
-  padding-top: 5px;
-  padding-bottom: 5px;
 }
 li:hover {
   background-color: rgb(203, 201, 201, 0.3);
@@ -103,6 +119,7 @@ li:hover {
   width: 15%;
   height: 100vh;
   background-color: rgb(68, 68, 68);
+  z-index: 200;
 }
 .menu2 {
   display: block;

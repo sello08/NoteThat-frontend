@@ -51,7 +51,6 @@ export default {
         })
         .then((res) => {
           // -----------------------------   Set token value to local storage ----------------------------------------
-
           localStorage.setItem("token", res.data.token);
 
           msg.value = res.data;
