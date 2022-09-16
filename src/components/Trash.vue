@@ -2,17 +2,33 @@
   <div class="main-trash">
     <div class="modal-trash">
       <h1 id="header">Trash Bin</h1>
+      <div class="dlt-notes" v-for="note in notes" :key="note.id">
+        {{ note.header }}
+      </div>
       <hr />
     </div>
   </div>
 </template>
 
 <script>
+import { getDeletedNoteList } from "@/composables/axiosFunctions";
+import { useStore } from "vuex";
+import { ref, computed } from "vue";
+
 export default {
   name: "Trash",
   components: {},
 
-  setup() {},
+  setup() {
+    const store = useStore();
+    const notes = computed(() => store.state.deletedNotes);
+
+    getDeletedNoteList().then((notes) => {
+      store.commit("setDeletedNotes", notes);
+    });
+
+    return { notes };
+  },
 };
 </script>
 
@@ -38,5 +54,8 @@ export default {
 }
 #header {
   margin-left: -230px;
+}
+.dlt-notes {
+  background-color: red;
 }
 </style>

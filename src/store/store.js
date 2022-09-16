@@ -5,6 +5,7 @@ export default  createStore({
 
   state: {
       notes: [],
+      deletedNotes: [],
       selectedNote:{
         id:'',
         header:'',
@@ -18,6 +19,9 @@ export default  createStore({
   mutations: {
     setNotes(state, notes ){
       state.notes = notes;      
+    },
+    setDeletedNotes( state, notes ){
+      state.deletedNotes = notes;      
     },
     editNotes(state, note){
       const tempNotes = state.notes;
@@ -49,6 +53,7 @@ export default  createStore({
     },
     updateIsTrashedClicked(state){
       state.isTrashed = !state.isTrashed
+      state.isShowing = false
     }
     
     }

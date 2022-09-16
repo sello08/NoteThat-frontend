@@ -17,12 +17,12 @@
     <span class="menu2"></span>
     <a-button
       id="new"
-      @click="updateShowing"
+      @click="submitNote"
       type="primary"
       danger
       size="large"
       shape="round"
-      ><router-link to="/">New Note</router-link>
+      >New Note
     </a-button>
 
     <br />
@@ -62,19 +62,18 @@ export default {
     function isTrashClicked() {
       store.commit("updateIsTrashedClicked");
     }
-
-    function updateShowing() {
-      store.commit("updateIsShowing");
-      store.commit("updateEditing2");
+    // ------------------------ Create Note ---------------------------------------------------
+    function submitNote() {
+      store.commit("updateIsShowing"); //---------- Open the Modal ---------------------------
     }
 
     return {
-      updateShowing,
       isShowing,
       isEditing,
       activeUser,
       activeUser,
       isTrashClicked,
+      submitNote,
     };
   },
 };
@@ -85,7 +84,7 @@ export default {
   color: rgb(203, 201, 201);
   font-weight: bolder;
   cursor: pointer;
-  margin-left: -110px;
+  margin-left: 0px;
 }
 #link {
   display: inline-flex;
