@@ -13,6 +13,7 @@
           v-if="title"
           @click="mode == 'create' ? submitNote() : submitNote2(id)"
         >
+          {{ mode }}
           <template><EditFilled /></template>
         </a-button>
       </div>

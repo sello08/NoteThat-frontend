@@ -51,6 +51,7 @@ import { UserOutlined } from "@ant-design/icons-vue";
 
 export default {
   name: "SideBar",
+  props: ["mode"],
   components: { UserOutlined },
   setup() {
     const store = useStore();
@@ -64,7 +65,8 @@ export default {
     }
     // ------------------------ Create Note ---------------------------------------------------
     function submitNote() {
-      store.commit("updateIsShowing"); //---------- Open the Modal ---------------------------
+      store.commit("updateIsShowing"); //---------- Open the CreateUpdateNote Modal ---------------------------
+      store.commit("updateEditing2");
     }
 
     return {

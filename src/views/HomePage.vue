@@ -3,7 +3,7 @@
     <SideMenu class="side-menu" />
     <div class="sub">
       <Transition>
-        <Trash v-if="isTrashed" />
+        <Trash v-if="isTrashed" :mode="isEditing == true ? 'edit' : 'create'" />
       </Transition>
 
       <SlidingCards />

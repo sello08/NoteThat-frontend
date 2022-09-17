@@ -41,6 +41,8 @@ export default  createStore({
     },
     updateIsShowing(state){
       state.isShowing = !state.isShowing
+      state.isTrashed = false
+      
     },
     updateEditing(state){
       state.isEditing = true
