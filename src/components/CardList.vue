@@ -48,6 +48,7 @@ import { getNoteList } from "@/composables/axiosFunctions";
 import axios from "axios";
 import { EditFilled } from "@ant-design/icons-vue";
 import { DeleteFilled } from "@ant-design/icons-vue";
+import { watch } from "@vue/runtime-core";
 
 export default {
   name: "CardList",
@@ -87,6 +88,12 @@ export default {
           });
         });
     }
+    watch(
+      () => notes.value,
+      () => {
+        console.log("kfefbfhdfh");
+      }
+    );
     function editNote(id) {
       store.commit("updateNotes", id);
       store.commit("updateEditing");

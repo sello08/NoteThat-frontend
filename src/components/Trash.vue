@@ -10,7 +10,7 @@
           <div class="btns-dlt">
             <div>
               <a-button
-                @click="deleteNote(note.id)"
+                @click="returnNote(note.id)"
                 type="link"
                 shape="circle"
                 class="more"
@@ -53,10 +53,13 @@
 
 <script>
 import { getDeletedNoteList } from "@/composables/axiosFunctions";
+ca;
+import { getNoteList } from "@/composables/axiosFunctions";
 import { DeleteFilled } from "@ant-design/icons-vue";
 import { RedoOutlined } from "@ant-design/icons-vue";
 import { useStore } from "vuex";
 import { ref, computed } from "vue";
+import axios from "axios";
 
 export default {
   name: "Trash",
@@ -68,21 +71,53 @@ export default {
 
     getDeletedNoteList().then((notes) => {
       store.commit("setDeletedNotes", notes);
+    });
 
-      function deleteNoteTotally(id) {
-        axios.delete(
-          "http://localhost:3000/note/" + id,
+    var token = localStorage.getItem("token");
+
+    function deleteNoteTotally(id) {
+      axios
+        .delete(
+          "http://localhost:3000/note1/" + id,
 
           {
             headers: {
               Authorization: "Bearer " + token,
             },
           }
-        );
-      }
-    });
+        )
+        .then(() => {
+          getDeletedNoteList().then((notes) => {
+            store.commit("setDeletedNotes", notes);
+          });
+        });
+    }
 
-    return { notes, deleteNoteTotally };
+    function returnNote(id) {
+      axios
+        .delete(
+          "http://localhost:3000/note2/" + id,
+
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        )
+        .then(() => {
+          getDeletedNoteList().then((notes) => {
+            store.commit("setDeletedNotes", notes);
+          });
+        })
+        .then(() => {
+          getNoteList().then((notes) => {
+            store.commit("setNotes", notes);
+            console.log("haydaaaaa");
+          });
+        });
+    }
+
+    return { notes, deleteNoteTotally, returnNote };
   },
 };
 </script>
