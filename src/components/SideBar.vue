@@ -30,8 +30,8 @@
       <li>
         <router-link id="link" to="/homepage">Home</router-link>
       </li>
-      <li>
-        <p id="link" @click="isTrashClicked">Trash</p>
+      <li @click="isTrashClicked">
+        <p id="link">Trash</p>
       </li>
       <li>
         <p id="link">Tags</p>

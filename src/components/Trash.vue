@@ -7,6 +7,28 @@
 
       <div class="list-dlt">
         <div class="cards-dlt" v-for="note in notes" :key="note.index">
+          <div class="btns-dlt">
+            <div>
+              <a-button
+                @click="deleteNote(note.id)"
+                type="link"
+                shape="circle"
+                class="more"
+              >
+                <template #icon><RedoOutlined /></template>
+              </a-button>
+            </div>
+            <div>
+              <a-button
+                @click="deleteNoteTotally(note.id)"
+                type="link"
+                shape="circle"
+                class="more"
+              >
+                <template #icon><DeleteFilled /></template>
+              </a-button>
+            </div>
+          </div>
           <div class="card-dlt">
             <div class="card-header-dlt">
               {{
@@ -17,29 +39,11 @@
             </div>
             <div class="card-content-dlt">
               {{
-                note.content.length > 100
-                  ? note.content.substring(0, 100) + "..."
+                note.content.length > 50
+                  ? note.content.substring(0, 50) + "..."
                   : note.content
               }}
             </div>
-          </div>
-          <div class="btns-dlt">
-            <a-button
-              @click="editNote(note.id)"
-              type="link"
-              shape="circle"
-              class="more"
-            >
-              <template #icon><EditFilled /></template>
-            </a-button>
-            <a-button
-              @click="deleteNote(note.id)"
-              type="link"
-              shape="circle"
-              class="more"
-            >
-              <template #icon><DeleteFilled /></template>
-            </a-button>
           </div>
         </div>
       </div>
@@ -49,12 +53,14 @@
 
 <script>
 import { getDeletedNoteList } from "@/composables/axiosFunctions";
+import { DeleteFilled } from "@ant-design/icons-vue";
+import { RedoOutlined } from "@ant-design/icons-vue";
 import { useStore } from "vuex";
 import { ref, computed } from "vue";
 
 export default {
   name: "Trash",
-  components: {},
+  components: { DeleteFilled, RedoOutlined },
 
   setup() {
     const store = useStore();
@@ -62,9 +68,21 @@ export default {
 
     getDeletedNoteList().then((notes) => {
       store.commit("setDeletedNotes", notes);
+
+      function deleteNoteTotally(id) {
+        axios.delete(
+          "http://localhost:3000/note/" + id,
+
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+      }
     });
 
-    return { notes };
+    return { notes, deleteNoteTotally };
   },
 };
 </script>
@@ -87,31 +105,40 @@ export default {
   height: 820px;
   width: 400px;
   margin-left: -608px;
-  padding: 50px;
+  padding: 40px;
 }
 #header-dlt {
   margin-left: -230px;
 }
-.dlt-notes {
-  background-color: red;
+.btns-dlt {
+  margin-left: -75px;
+}
+.list-dlt {
+  padding: 0px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 600px;
+  width: 350px;
+  margin-left: 7px;
+}
+.cards-dlt {
+  display: inline-flex;
+  background-color: white;
+  line-height: 30px;
+  margin: 30px 3px;
+  border-radius: 15px;
+  width: 270px;
+  padding-left: 24px;
 }
 .card-dlt {
   width: 350px;
   height: 100px;
-}
-.cards-dlt {
-  background-color: white;
-  line-height: 30px;
-  margin: 30px 20px;
-  border-radius: 15px;
+  margin-left: 30px;
 }
 .more-dlt {
   margin: 8px;
 }
-.list-dlt {
-  padding-top: 15px;
-  margin-left: -30px;
-}
+
 .aaa-dlt {
   margin-top: 25px;
   margin-left: 10px;
@@ -130,16 +157,17 @@ export default {
   border-radius: 15px;
 }
 .card-content-dlt {
-  padding: 10px;
-  max-width: 290px;
+  padding: -26px;
+  max-width: 210px;
 }
 .card-header-dlt {
-  width: 290px;
+  width: 271px;
   background-color: rgb(68, 68, 68);
   border-top-right-radius: 15px;
   border-top-left-radius: 5px;
   color: white;
   padding: 1px;
+  margin-left: -27px;
 }
 .aaa-dlt *::-webkit-scrollbar {
   width: 4px;
@@ -152,7 +180,7 @@ export default {
 }
 
 .aaa-dlt *::-webkit-scrollbar-thumb {
-  background-color: #9e9e9e;
+  background-color: #c41b1b;
   border-radius: 4px;
 }
 </style>

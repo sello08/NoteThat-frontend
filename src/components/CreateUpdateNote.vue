@@ -8,13 +8,12 @@
       <textarea v-model="info" placeholder="add multiple lines"></textarea>
       <div>
         <a-button
-          shape="circle"
-          type="link"
+          shape="round"
+          type="primary"
           v-if="title"
           @click="mode == 'create' ? submitNote() : submitNote2(id)"
         >
           {{ mode }}
-          <template><EditFilled /></template>
         </a-button>
       </div>
     </div>
@@ -26,14 +25,13 @@ import { ref, computed } from "vue";
 import { useStore } from "vuex";
 import axios from "axios";
 import { getNoteList } from "@/composables/axiosFunctions";
-import { EditFilled } from "@ant-design/icons-vue";
+
 import { CloseCircleFilled } from "@ant-design/icons-vue";
 
 export default {
   name: " CreateUpdateNote ",
   props: ["mode"],
   components: {
-    EditFilled,
     CloseCircleFilled,
   },
   setup(props) {
