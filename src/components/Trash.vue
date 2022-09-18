@@ -53,7 +53,6 @@
 
 <script>
 import { getDeletedNoteList } from "@/composables/axiosFunctions";
-ca;
 import { getNoteList } from "@/composables/axiosFunctions";
 import { DeleteFilled } from "@ant-design/icons-vue";
 import { RedoOutlined } from "@ant-design/icons-vue";
