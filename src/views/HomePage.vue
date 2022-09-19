@@ -5,7 +5,6 @@
       <Transition>
         <Trash v-if="isTrashed" :mode="isEditing == true ? 'edit' : 'create'" />
       </Transition>
-
       <SlidingCards />
       <CreateUpdateNote
         v-if="isShowing"
