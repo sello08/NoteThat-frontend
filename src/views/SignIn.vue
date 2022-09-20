@@ -89,6 +89,7 @@ export default {
   height: 660px;
   width: 500px;
   border-radius: 10px;
+  box-shadow: 0 0 30px 0px black;
 }
 .input {
   border: 1px white solid;

@@ -10,11 +10,6 @@
     <span class="active-user">{{ activeUser }}</span>
     <br />
     <br />
-    <a-button id="new" type="primary" danger size="small" shape="round"
-      ><router-link to="/">Sign Out</router-link>
-    </a-button>
-
-    <span class="menu2"></span>
     <a-button
       id="new"
       @click="submitNote"
@@ -24,6 +19,8 @@
       shape="round"
       >New Note
     </a-button>
+
+    <span class="menu2"></span>
 
     <br />
     <div id="sidemenu-btns">
@@ -39,8 +36,12 @@
       <li>
         <p id="link">Alarm</p>
       </li>
-      <hr id="line" />
     </div>
+    <hr id="line" />
+
+    <a-button id="new" type="primary" danger size="small" shape="round"
+      ><router-link to="/">Sign Out</router-link>
+    </a-button>
   </div>
 </template>
 
@@ -86,7 +87,8 @@ export default {
   color: rgb(203, 201, 201);
   font-weight: bolder;
   cursor: pointer;
-  margin-left: 0px;
+  margin-left: 28px;
+  text-align: left;
 }
 #link {
   display: inline-flex;

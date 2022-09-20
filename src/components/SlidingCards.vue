@@ -1,7 +1,7 @@
 <template>
   <div class="wlcome">
-    <div class="msg">Good {{ dayTime }}, {{ user }}</div>
-    <div class="time">kfdkbdbf</div>
+    <div class="msg">Good days, {{ user }}!</div>
+    <div class="time">{{ dayTime }}</div>
   </div>
 
   <div>
@@ -28,20 +28,34 @@
   </div>
 </template>
 
+
+
+
+
 <script>
 import { ref } from "vue";
 
 export default {
   setup() {
     const user = ref("Selim");
-    const dayTime = ref("afternoon");
+
+    const d = new Date();
+    var year = d.getFullYear();
+    var mounth = d.getMonth();
+    var day = d.getUTCDate();
+
+    var dayTime = day + "/" + mounth + "/" + year;
 
     return { user, dayTime };
   },
 };
 </script>
+
+
+
+
   
-  <style scoped>
+<style scoped>
 /* For demo */
 .ant-carousel :deep(.slick-slide) {
   text-align: center;
@@ -61,10 +75,19 @@ export default {
   padding: 10px;
   height: 44px;
   background: #f6828e;
+}
+.msg {
+  display: inline-flex;
   color: white;
   font-weight: bold;
-  font-size: 20px;
-  font-family: monospace;
+  font-size: 18px;
+  padding-right: 965px;
+}
+.time {
+  display: inline-flex;
+  color: white;
+  font-size: 16px;
+  margin-right: 0px;
 }
 </style>
   
