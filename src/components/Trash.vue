@@ -135,7 +135,7 @@ export default {
 }
 .modal-trash {
   text-align: center;
-  background-color: rgb(217, 211, 212);
+  background-color: white;
   height: 820px;
   width: 400px;
   margin-left: -608px;

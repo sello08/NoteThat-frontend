@@ -88,7 +88,7 @@ export default {
   background-color: #f6828e;
   height: 660px;
   width: 500px;
-  border-radius: 10px;
+  border-radius: 15px;
   box-shadow: 0 0 30px 0px black;
 }
 .input {

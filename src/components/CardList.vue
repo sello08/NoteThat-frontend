@@ -12,8 +12,8 @@
           </div>
           <div class="card-content">
             {{
-              note.content.length > 240
-                ? note.content.substring(0, 240) + "..."
+              note.content.length > 150
+                ? note.content.substring(0, 150) + "..."
                 : note.content
             }}
           </div>
@@ -114,32 +114,35 @@ export default {
 
 <style>
 .card {
-  width: 250px;
-  height: 350px;
+  width: 200px;
+  height: 250px;
 }
 .cards {
   background-color: white;
   line-height: 30px;
-  margin: 10px 20px;
+  margin: -5px 20px;
   border-radius: 15px;
+  box-shadow: 0 0 10px 0px rgb(126, 125, 125);
 }
 .more {
   margin: 8px;
 }
 .list {
-  max-width: 1300px;
+  max-width: 800px;
   padding-top: 15px;
   display: flex;
-  overflow: scroll;
+  overflow-y: hidden;
+  overflow-x: scroll;
 }
 .aaa {
   margin-top: 25px;
   margin-left: 10px;
   color: rgb(0, 0, 0);
-  background-color: rgb(242, 241, 241);
+  background-color: white;
   box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034);
   border-radius: 15px;
-  height: 400px;
+  height: 303px;
+  width: 800px;
 }
 .top-side {
   margin-left: 10px;
@@ -160,9 +163,9 @@ export default {
   padding: 1px;
 }
 .aaa *::-webkit-scrollbar {
-  width: 4px;
-  height: 5px;
-  padding: 10px;
+  width: 0px;
+  height: 0px;
+  padding: 0px;
 }
 
 .aaa *::-webkit-scrollbar-track {

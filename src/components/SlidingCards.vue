@@ -61,7 +61,7 @@ export default {
   text-align: center;
   height: 140px;
   line-height: 160px;
-  background: #f6828e;
+  background: #ff9494;
   overflow: hidden;
 }
 
@@ -74,18 +74,19 @@ export default {
 .wlcome {
   padding: 10px;
   height: 44px;
-  background: #f6828e;
+  background: #ff9494;
 }
 .msg {
   display: inline-flex;
   color: white;
-  font-weight: bold;
+  font-weight: 400;
   font-size: 18px;
   padding-right: 965px;
 }
 .time {
   display: inline-flex;
   color: white;
+  font-weight: 200;
   font-size: 16px;
   margin-right: 0px;
 }

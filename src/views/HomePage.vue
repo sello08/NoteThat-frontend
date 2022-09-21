@@ -10,7 +10,14 @@
         v-if="isShowing"
         :mode="isEditing == true ? 'edit' : 'create'"
       />
-      <CardList />
+
+      <div class="sub-sub">
+        <CardList />
+        <SketchBook />
+        <Transition>
+          <SketchBookMenu v-if="isSketched" />
+        </Transition>
+      </div>
     </div>
   </div>
 </template>
@@ -21,6 +28,8 @@ import SlidingCards from "../components/SlidingCards.vue";
 import CardList from "../components/CardList.vue";
 import CreateUpdateNote from "../components/CreateUpdateNote.vue";
 import Trash from "../components/Trash.vue";
+import SketchBook from "../components/SketchBook.vue";
+import SketchBookMenu from "../components/SketchBookMenu.vue";
 import { useStore } from "vuex";
 import { ref, computed } from "vue";
 
@@ -33,13 +42,17 @@ export default {
     CreateUpdateNote,
     Trash,
     Trash,
+    SketchBook,
+    SketchBook,
+    SketchBookMenu,
   },
   setup() {
-    const token = ref(localStorage.getItem("token"));
     const store = useStore();
+    const token = ref(localStorage.getItem("token"));
     const isShowing = computed(() => store.state.isShowing);
     const isEditing = computed(() => store.state.isEditing);
     const isTrashed = computed(() => store.state.isTrashed);
+    const isSketched = computed(() => store.state.isSketched);
 
     function updateShowing() {
       store.commit("updateIsShowing");
@@ -50,6 +63,7 @@ export default {
       isEditing,
       token,
       isTrashed,
+      isSketched,
     };
   },
 };
@@ -77,6 +91,9 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+.sub-sub {
+  display: flex;
+}
 .main {
   display: flex;
   margin-left: -0px;
@@ -87,6 +104,7 @@ nav a.router-link-exact-active {
 .sub {
   margin-left: 0;
   width: 85%;
+  background-color: rgb(242, 241, 241);
 }
 .v-enter-active,
 .v-leave-active {

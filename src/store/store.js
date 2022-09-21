@@ -15,6 +15,7 @@ export default  createStore({
       isEditing: '',
       activeUser: '',
       isTrashed: false,
+      isSketched: false,
     },
   mutations: {
     setNotes(state, notes ){
@@ -56,6 +57,9 @@ export default  createStore({
     updateIsTrashedClicked(state){
       state.isTrashed = !state.isTrashed
       state.isShowing = false
+    },
+    updateIsSketched(state){
+      state.isSketched = !state.isSketched
     }
     
     }
