@@ -10,6 +10,7 @@
       rows="18"
       cols="45"
       class="sketch-text"
+      v-model="sketchNote"
     ></textarea>
   </div>
 </template>
@@ -24,11 +25,13 @@ export default {
   setup() {
     const store = useStore();
     const isSketched = computed(() => store.state.isSketched);
+    var sketchNote = ref("");
 
     function sketched() {
       store.commit("updateIsSketched");
+      store.commit("updateSketchNoteValue", sketchNote.value);
     }
-    return { isSketched, sketched };
+    return { isSketched, sketched, sketchNote };
   },
 };
 </script>

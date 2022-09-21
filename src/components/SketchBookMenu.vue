@@ -1,15 +1,49 @@
 <template>
   <div class="menu-main">
-    <button class="menu-btn">Create Note</button>
+    <button @click="submitSketchNote" class="menu-btn">Create Note</button>
     <br />
     <button class="menu-btn">Delete</button>
   </div>
 </template>
 
 <script>
+import { getNoteList } from "@/composables/axiosFunctions";
+import { useStore } from "vuex";
+import { ref, computed } from "vue";
+import axios from "axios";
+
 export default {
   setup() {
-    return {};
+    const store = useStore();
+    const sketchNote = computed(() => store.state.sketchNote);
+
+    var token = localStorage.getItem("token");
+
+    function submitSketchNote() {
+      console.log("sello:", sketchNote.value);
+
+      axios
+        .post(
+          "http://localhost:3000/note",
+          {
+            header: "SketchBook",
+            content: sketchNote.value,
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        )
+        .then(() => {
+          getNoteList().then((notes) => {
+            store.commit("setNotes", notes);
+          });
+        });
+
+      store.commit("updateIsSketched");
+    }
+    return { submitSketchNote, sketchNote };
   },
 };
 </script>

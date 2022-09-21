@@ -6,6 +6,7 @@ export default  createStore({
   state: {
       notes: [],
       deletedNotes: [],
+      sketchNote: "",
       selectedNote:{
         id:'',
         header:'',
@@ -60,7 +61,10 @@ export default  createStore({
     },
     updateIsSketched(state){
       state.isSketched = !state.isSketched
-    }
+    },
+    updateSketchNoteValue(state, sketchValue){
+      state.sketchNote = sketchValue
+    },
     
     }
 })
