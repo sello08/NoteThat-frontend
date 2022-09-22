@@ -30,6 +30,9 @@ export default {
     function sketched() {
       store.commit("updateIsSketched");
       store.commit("updateSketchNoteValue", sketchNote.value);
+      console.log("sketchNote1:", sketchNote.value);
+      sketchNote.value = "";
+      console.log("sketchNote2:", sketchNote.value);
     }
     return { isSketched, sketched, sketchNote };
   },

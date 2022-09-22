@@ -1,15 +1,15 @@
 <template>
-  <div class="menu-main">
-    <button @click="submitSketchNote" class="menu-btn">Create Note</button>
+  <div class="menu-main" v-if="sketchNote">
+    <button @click="submitSketchNote" class="menu-btn">Create a Note</button>
     <br />
-    <button class="menu-btn">Delete</button>
+    <button @click="clear" class="menu-btn">Clear</button>
   </div>
 </template>
 
 <script>
 import { getNoteList } from "@/composables/axiosFunctions";
 import { useStore } from "vuex";
-import { ref, computed } from "vue";
+import { computed } from "vue";
 import axios from "axios";
 
 export default {
@@ -18,6 +18,8 @@ export default {
     const sketchNote = computed(() => store.state.sketchNote);
 
     var token = localStorage.getItem("token");
+
+    function clear() {}
 
     function submitSketchNote() {
       console.log("sello:", sketchNote.value);
@@ -41,9 +43,9 @@ export default {
           });
         });
 
-      store.commit("updateIsSketched");
+      store.commit("updateIsSketched2");
     }
-    return { submitSketchNote, sketchNote };
+    return { submitSketchNote, sketchNote, clear };
   },
 };
 </script>

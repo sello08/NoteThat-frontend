@@ -115,21 +115,19 @@ export default {
 <style>
 .card {
   width: 200px;
-  height: 250px;
+  height: 240px;
 }
 .cards {
   background-color: white;
   line-height: 30px;
-  margin: -5px 20px;
+  margin: -7px 20px;
   border-radius: 15px;
   box-shadow: 0 0 10px 0px rgb(126, 125, 125);
-}
-.more {
-  margin: 8px;
 }
 .list {
   max-width: 800px;
   padding-top: 15px;
+  padding-bottom: 15px;
   display: flex;
   overflow-y: hidden;
   overflow-x: scroll;
@@ -161,6 +159,9 @@ export default {
   border-top-left-radius: 5px;
   color: white;
   padding: 1px;
+}
+.btns {
+  margin: 8px;
 }
 .aaa *::-webkit-scrollbar {
   width: 0px;

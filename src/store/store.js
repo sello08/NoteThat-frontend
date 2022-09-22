@@ -62,6 +62,9 @@ export default  createStore({
     updateIsSketched(state){
       state.isSketched = !state.isSketched
     },
+    updateIsSketched2(state){
+      state.isSketched = false
+    },
     updateSketchNoteValue(state, sketchValue){
       state.sketchNote = sketchValue
     },

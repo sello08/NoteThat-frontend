@@ -87,15 +87,15 @@ export default {
   color: rgb(203, 201, 201);
   font-weight: bolder;
   cursor: pointer;
-  margin-left: 28px;
   text-align: left;
 }
 #link {
   display: inline-flex;
   height: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   color: rgb(203, 201, 201);
+  padding-left: 28px;
 }
 li {
   list-style-type: none;
